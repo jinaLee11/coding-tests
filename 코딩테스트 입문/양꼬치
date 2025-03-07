@@ -1,0 +1,18 @@
+class Solution {
+    public int solution(int n, int k) {
+        int nPrice = n * 12000;
+        int kPrice = k * 2000;
+        int survicePrice = (n/10)*2000;
+
+        int answer = nPrice + kPrice - survicePrice;       
+        return answer;
+    }
+}
+
+// 이렇게 심플하게 풀 수도 있더라 !
+class Solution {
+    public int solution(int n, int k) {     
+        return n * 12000 + k * 2000 - (n/10)*2000;
+    }
+}
+
