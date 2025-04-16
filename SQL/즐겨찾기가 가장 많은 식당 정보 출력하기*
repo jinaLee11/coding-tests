@@ -1,0 +1,19 @@
+// 문제 https://school.programmers.co.kr/learn/courses/30/lessons/131123
+// REST_INFO 테이블에서 음식종류별로 즐겨찾기수가 가장 많은 식당의 음식 종류, ID, 식당 이름, 즐겨찾기수를 조회하는 SQL문을 작성해주세요. 
+// 이때 결과는 음식 종류를 기준으로 내림차순 정렬해주세요.
+
+
+// 정답코드
+SELECT FOOD_TYPE, REST_ID, REST_NAME, FAVORITES
+FROM
+(
+SELECT FOOD_TYPE, REST_ID, REST_NAME, FAVORITES,
+RANK() OVER (PARTITION BY FOOD_TYPE ORDER BY FAVORITES DESC) RANKING
+FROM REST_INFO
+) R
+GROUP BY FOOD_TYPE
+ORDER BY FOOD_TYPE DESC
+
+
+// RANK()함수 사용 ! RANK() OVER (PARTITION BY FOOD_TYPE ORDER BY FAVORITES DESC)
+// 하나하나 뜯어보면, rank함수를 써서 순위를 매길거다, 음식타입별로 파티션을 쳐서(구분해서), 좋아요가 높은 순으로!!
