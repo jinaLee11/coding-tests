@@ -1,0 +1,23 @@
+// 문제 https://school.programmers.co.kr/learn/courses/30/lessons/151137
+
+SELECT CAR_TYPE, COUNT(*) AS CARS
+FROM CAR_RENTAL_COMPANY_CAR
+WHERE OPTIONS LIKE '%통풍시트%' OR OPTIONS LIKE '%열선시트%' OR OPTIONS LIKE '%가죽시트%'
+GROUP BY CAR_TYPE
+ORDER BY CAR_TYPE ASC
+
+/*
+헷갈렸던 부분 -> WHERE OPTIONS LIKE '%통풍시트%' OR OPTIONS LIKE '%열선시트%' OR OPTIONS LIKE '%가죽시트%'
+
+문제 조건 상 WHERE절을 '통풍시트', '열선시트', '가죽시트' 중 하나 이상의 옵션이 포함된 자동차를 대상으로 지정해야 했어서, 아래와 같은 쿼리를 시도했다.
+1. WHERE OPTIONS IS NOT NULL <- '통풍시트', '열선시트', '가죽시트' 이외의 옵션도 있기 때문에 컬럼값이 null만 아니면 해당됨.
+2. WHERE OPTIONS IN ('통풍시트' OR '열선시트' OR '가죽시트') <- OR 연산자는 불리언 연산(논리 연산)용도로 사용되는데, '통풍시트' OR '열선시트'는 SQL에서 문자열 간 논리연산이므로 true로 평가
+3. WHERE OPTIONS LIKE '%통풍시트%' OR '%열선시트%' OR '%가죽시트%' <- WHERE절은 불리언 조건을 요구하는데 '%열선시트%'와 '%가죽시트%'는 boolean 조건(OPTIONS LIKE)으로 묶여있지 않기 때문에, 단순 문자열로 평가되어 true로 반환됨
+
+결론적으로 전부 조건에 부합하지 않는 쿼리 ..
+올바르게 boolean 조건을 포함해 아래처럼 수정했다 !
+WHERE OPTIONS LIKE '%통풍시트%' 
+OR OPTIONS LIKE '%열선시트%' 
+OR OPTIONS LIKE '%가죽시트%'
+
+*/
