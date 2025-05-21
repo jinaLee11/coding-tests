@@ -1,1 +1,1 @@
-# programmers-coding-tests
+# coding-tests
