@@ -1,0 +1,5 @@
+// https://leetcode.com/problems/recyclable-and-low-fat-products/
+
+SELECT PRODUCT_ID
+FROM Products
+WHERE LOW_FATS = 'Y' AND RECYCLABLE ='Y'
