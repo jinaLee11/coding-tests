@@ -1,0 +1,11 @@
+// https://leetcode.com/problems/invalid-tweets/description/
+
+SELECT tweet_id
+FROM Tweets
+WHERE LENGTH(content) > 15
+
+/*
+LENGTH( 문자/칼럼 ) : 문자/컬럼의 길이 구하는 SQL함수. 띄어쓰기(공백)를 포함한 바이트 수를 반환해준다.
+CHEOL SU -> 8 (영문자(1BYTE) 총 7바이트 + 공백 1)
+철수 -> 6 (한글(3BYTE) 총 6바이트)
+*/
